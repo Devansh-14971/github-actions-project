@@ -32,6 +32,9 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          
+      - name: Downgrade npm to supported version
+        run: npm install -g npm@9.9.0
 
       - name: Install Dependancies
         run: npm ci
@@ -66,9 +69,6 @@ jobs:
         with:
           version: '18'
           cache: 'npm'
-          
-      - name: Downgrade npm to supported version
-        run: npm install -g npm@9.9.0
 
       - name: build site
         run: num run prod
