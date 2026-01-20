@@ -36,14 +36,17 @@ jobs:
       - name: Downgrade npm to supported version
         run: npm install -g npm@9.9.0
 
-      - name: Install dependencies
-        run: npm ci
-        env:
-          PAGEFIND_DISABLE_DOWNLOAD: true
+      - name: Force working Pagefind version
+        run: |
+          npm pkg set dependencies.pagefind="0.11.0"
+          npm pkg set devDependencies.pagefind="0.11.0"
 
+      - name: Install dependencies
+        run: npm install
+        
       - name: Install Pagefind binary
         run: npx pagefind --version
-        
+
       - name: Start Linters
         run: npm run lint:all  
       
