@@ -32,18 +32,12 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          
-      - name: Downgrade npm to supported version
-        run: npm install -g npm@9.9.0
-
-      - name: Force working Pagefind version
-        run: |
-          npm pkg set dependencies.pagefind="0.11.0"
-          npm pkg set devDependencies.pagefind="0.11.0"
 
       - name: Install dependencies
         run: npm install
-        
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install Pagefind binary
         run: npx pagefind --version
 
